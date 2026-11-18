@@ -22,13 +22,12 @@ firebase.auth().onAuthStateChanged((user) =>{
             console.error(error);
         })
         
-        
       }
       
     //   document.getElementById("welcome").innerText = `WELCOME HOME ${user.userName}`
    })
 
-   firebase.firestore().collection("tweets").get().then((queryTweets)=>{
+   firebase.firestore().collection("tweets").where("tweetId", "==",selectedTweetId).get().then((queryTweets)=>{
      queryTweets.forEach((tweetDoc)=>{
       let tweet = tweetDoc.data()
       console.log(tweet);
@@ -40,6 +39,23 @@ firebase.auth().onAuthStateChanged((user) =>{
       document.getElementById("tweetContainer").insertAdjacentHTML("afterbegin",tweetHtml)
      })
    })
+     function generateCommentHtml(comment,){
+          return`
+      <div class="post" onclick="navigateToCommentPage(\'${id}\')">
+      <div class="post-profile">
+      <img src"" alt"profile-img"
+      <h6>${comment.name}</h6>
+      </div>
+
+       <p>${comment.tweet}</p>
+       <div class="post-icons">
+       <i class="fa-solid fa-message"></i>
+       <i class="fa-solid fa-retweet"></i>
+       <i class="fa-solid fa-thumbs-up"></i>
+       </div>
+      <div>
+     `
+     }
 
    function generateTweetHtml(tweet,id){
      return`

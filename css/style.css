@@ -129,3 +129,45 @@
   gap: 5px;
 }
 
+.post{
+    border-bottom: 1px solid rgb(34, 142, 188);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+ .post-icons{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+ }
+
+ .profile{
+  height: 90%;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  background-color: aqua;
+ }
+
+ /* .profile-picture img{
+  height: 40%;
+  width: 50%;
+ }
+
+ .profiee img{
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: -50px;
+  border-color: #222;
+} */
+
+.sam img{
+  height: 150px;
+  width: 150px;
+  border-radius:140px;
+}
+ 

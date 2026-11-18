@@ -10,19 +10,41 @@ firebase.auth().onAuthStateChanged((user) => {
       let user = userDoc.data()
       console.log(user);
 
+      document.getElementById("postBtn").onclick =function(){
+       let comment =document.getElementById("post").value;
+       firebase.firestore().collection("comments").doc().set({
+        comment,
+        name: user.userName,
+        email:user.emailAddress,
+        userId: uid,
+        createdOn: Date.now()
+       }).then(()=>{
+        window.location.reload()
+       })
+      }
+
 
 
     //   document.getElementById("welcome").innerText = `WELCOME HOME ${user.userName}`
    })
-
+       // fetch collected tweet from database using  selectedtweet ID
    firebase.firestore().collection("tweets").doc(selectedTweetId).get().then((tweetDoc) =>{
     let tweet = tweetDoc.data()
 
     let tweetHtml = generateTweetHtml(tweet)
-    document.getElementById("tweetContainer").insertAdjacentHTML("afterbegi", tweetHtml)
+    document.getElementById("tweetContainer").insertAdjacentHTML("afterbegin", tweetHtml)
    })
 
+   firebase.firestore().collection("comments").get().then((queryComments)=>{
+     queryComments.forEach((commentDoc)=>{
   
+      let comment = commentDoc.data()
+        console.log(comment);
+        let commentHtml = generateCommentsHtml(comment)
+        document.getElementById("commentContainer").insertAdjacentHTML("afterbegin", commentHtml)
+     })
+
+   })
 
    function generateTweetHtml(tweet){
      return`
